@@ -26,6 +26,6 @@ app.Run();
 //Classe que vai representar nosso produto para efetuar os testes
 public class Product
 {
-    public string Code { get; set; }
-    public string Name { get; set; }
+    public string? Code { get; set; }               //No dot net 6 coloca-se um ponto de interrogação para tirar
+    public string? Name { get; set; }               //o erro de "não pode ser nulo".
 }
