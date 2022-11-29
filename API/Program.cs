@@ -1,3 +1,5 @@
+//Estudo de DotNet 6.0
+//
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
