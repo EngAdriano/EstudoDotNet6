@@ -1,5 +1,7 @@
 //Estudo de DotNet 6.0
 //
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
@@ -21,6 +23,29 @@ app.MapPost("/saveproduct", (Product product) =>
     return product.Code + " - " + product.Name;
 });
 
+//Passar informações por meio da URL duas maneiras
+
+//api.app.com/users?datastart={date}&dataend={data}
+//Através de Query parameter
+app.MapGet("/getproduct", ([FromQuery] string dateStart, [FromQuery] string dateEnd) =>
+{
+    return dateStart + " - " + dateEnd;
+});
+
+//api.app.com/users/{code}
+//Através de rota
+app.MapGet("/getproduct/{code}", ([FromRoute] string code) =>
+{
+    return code;
+});
+
+
+//Enviando informações pelo Header
+app.MapGet("/getproductbyheader", (HttpRequest request) =>
+{
+    return request.Headers["product-code"].ToString();
+}
+);
 
 app.Run();
 
