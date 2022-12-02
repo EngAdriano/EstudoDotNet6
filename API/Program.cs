@@ -49,9 +49,27 @@ app.MapGet("/getproductbyheader", (HttpRequest request) =>
 
 app.Run();
 
+public static class ProductRepository       //static para sobreviver, continuar existindo na memória
+{
+    public static List<Product>? Products { get; set; }     //Lista Products (Plural)
+
+    public static void Add(Product product)
+    {
+        if (Products == null)
+            Products = new List<Product>();
+
+        Products.Add(product);
+    }
+
+    public static Product GetBy(string code)
+    {
+        return Products.First(p => p.Code == code);
+    }
+}
+
 
 //Classe que vai representar nosso produto para efetuar os testes
-public class Product
+public class Product        //Product no singular
 {
     public string? Code { get; set; }               //No dot net 6 coloca-se um ponto de interrogação para tirar
     public string? Name { get; set; }               //o erro de "não pode ser nulo".
