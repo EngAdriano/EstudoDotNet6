@@ -18,10 +18,12 @@ app.MapGet("/AddHeader", (HttpResponse response) =>                 //Endpoint c
     return new { Name = "Jose Adriano", Age = 58 };
 });
 
+/*
 app.MapPost("/saveproduct", (Product product) =>
 {
     return product.Code + " - " + product.Name;
 });
+*/
 
 //Passar informações por meio da URL duas maneiras
 
@@ -32,13 +34,14 @@ app.MapGet("/getproduct", ([FromQuery] string dateStart, [FromQuery] string date
     return dateStart + " - " + dateEnd;
 });
 
+/*
 //api.app.com/users/{code}
 //Através de rota
 app.MapGet("/getproduct/{code}", ([FromRoute] string code) =>
 {
     return code;
 });
-
+*/
 
 //Enviando informações pelo Header
 app.MapGet("/getproductbyheader", (HttpRequest request) =>
@@ -46,6 +49,25 @@ app.MapGet("/getproductbyheader", (HttpRequest request) =>
     return request.Headers["product-code"].ToString();
 }
 );
+
+//==============================================================================================================
+//
+//CRUD básico com repositório em lista
+//
+
+//Verbo POST - Insrir produtos na lista
+app.MapPost("/saveproduct", (Product product) =>
+{
+    ProductRepository.Add(product);             //Recebe um produto e grava na lista
+});
+
+//Verbo GET - adquirir produto da lista no servidor
+app.MapGet("/getproduct/{code}", ([FromRoute] string code) =>
+{
+    var product = ProductRepository.GetBy(code);
+    return product;
+});
+
 
 app.Run();
 
@@ -61,9 +83,9 @@ public static class ProductRepository       //static para sobreviver, continuar 
         Products.Add(product);
     }
 
-    public static Product GetBy(string code)
+    public static Product GetBy(string? code)
     {
-        return Products.First(p => p.Code == code);
+        return Products.FirstOrDefault(p => p.Code == code);
     }
 }
 
