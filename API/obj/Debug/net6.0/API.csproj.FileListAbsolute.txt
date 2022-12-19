@@ -50,3 +50,5 @@ C:\Repositorios_Github\EstudoDotNet6\API\obj\Debug\net6.0\refint\API.dll
 C:\Repositorios_Github\EstudoDotNet6\API\obj\Debug\net6.0\API.pdb
 C:\Repositorios_Github\EstudoDotNet6\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 C:\Repositorios_Github\EstudoDotNet6\API\obj\Debug\net6.0\ref\API.dll
+C:\Repositorios_Github\EstudoDotNet6\API\bin\Debug\net6.0\appsetting.Staging.Development.json
+C:\Repositorios_Github\EstudoDotNet6\API\bin\Debug\net6.0\appsetting.Staging.json

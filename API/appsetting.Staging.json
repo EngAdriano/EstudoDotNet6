@@ -1,6 +1,6 @@
 {
   "Database": {
-    "Connection": "Server3",
+    "Connection": "server3",
     "Port": 1010
   },
 
@@ -9,5 +9,6 @@
       "Default": "Information",
       "Microsoft.AspNetCore": "Warning"
     }
-  }
+  },
+  "AllowedHosts": "*"
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZBvEZo1P5sE28ww/cOztqs/eXFT6kzBaBPfMH8wu3eqWOLADaa1Co3uwAH+W0BXq1COGy+fqtt+OW7d5yDam8w==",
+  "dgSpecHash": "TWO1ya8BA4W8/nCT5rf24QF327cDJIxjRlBeh5iBi2Ir+IW49fVOD+Fe8nXNNp7BcOiff1XRNfQug7Ul7Dywiw==",
   "success": true,
-  "projectFilePath": "C:\\Repositorio_Git\\EstudoDotNet6\\API\\API.csproj",
+  "projectFilePath": "C:\\Repositorios_Github\\EstudoDotNet6\\API\\API.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
