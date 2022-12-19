@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
+var configuration = app.Configuration;                  //Inicializando nossa lista pelo
+ProductRepository.Init(configuration);                  //appsettings.json
 
 
 //Endpoint simples com método GET
@@ -96,19 +98,30 @@ app.MapDelete("products/{code}", ([FromRoute] string code) =>
     return Results.Ok();
 });
 
-
+//EndPoint para pegar a configuração do arquivo appsettings.json
+//Devolver o nome do servidor e a porta
+app.MapGet("/configuration/database", (IConfiguration configuration) =>
+{
+    return Results.Ok($"{configuration["database:connection"]}/{configuration["database:port"]}");
+});
 
 
 app.Run();
 
 public static class ProductRepository       //static para sobreviver, continuar existindo na memória
 {
-    public static List<Product>? Products { get; set; }     //Lista Products (Plural)
+    public static List<Product>? Products { get; set; } = Products = new List<Product>();    //Lista Products (Plural)
+
+    public static void Init(IConfiguration configuration)
+    {
+        var products = configuration.GetSection("Products").Get<List<Product>>();
+        Products = products;
+    }
 
     public static void Add(Product product)
     {
         if (Products == null)
-            Products = new List<Product>();
+            Products = new List<Product>();             //Inicialização da lista para armazenamento dos produtos
 
         Products.Add(product);                          //Adicionando produto a nossa lista
     }

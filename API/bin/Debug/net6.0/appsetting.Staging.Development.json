@@ -1,9 +1,4 @@
 {
-  "Database": {
-    "Connection": "Server3",
-    "Port": 1010
-  },
-
   "Logging": {
     "LogLevel": {
       "Default": "Information",
