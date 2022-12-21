@@ -1,10 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
+var configuracao = app.Configuration;                   //Inicializando nossa lista pelo
+ProdutoRepositorio.Init(configuracao);                  //appsettings.json
 
-//app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Hello World!");
+
+//Estudo da criação de CRUD simples
+
+app.MapPost("/produtos", (Produto produto) =>
+{
+    ProdutoRepositorio.Add(produto);                                   //Recebe um produto e grava na lista
+    return Results.Created($"/products/{produto.Id}", produto.Id);     //Retornar o statusCode da operação
+});
 
 app.MapGet("/produtos/{Id}", ( [FromRoute] int Id) =>
 {
@@ -17,6 +26,21 @@ app.MapGet("/produtos/{Id}", ( [FromRoute] int Id) =>
     {
         return Results.NotFound();
     }
+});
+
+app.MapPut("/produtos", (Produto produto) =>
+{
+    var produtoSalvo = ProdutoRepositorio.GetBy(produto.Id);
+    produtoSalvo.Nome = produto.Nome;
+    produtoSalvo.Descricao = produto.Descricao;
+    return Results.Ok();
+});
+
+app.MapDelete("produtos/{Id}", ([FromRoute] int Id) =>
+{
+    var produtoSalvo = ProdutoRepositorio.GetBy(Id);
+    ProdutoRepositorio.Remove(produtoSalvo);
+    return Results.Ok();
 });
 
 app.Run();
