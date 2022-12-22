@@ -12,7 +12,7 @@ app.MapGet("/", () => "Hello World!");
 app.MapPost("/produtos", (Produto produto) =>
 {
     ProdutoRepositorio.Add(produto);                                   //Recebe um produto e grava na lista
-    return Results.Created($"/products/{produto.Id}", produto.Id);     //Retornar o statusCode da operação
+    return Results.Created($"/products/{produto.Id}", produto.Id);     //Retornar o statusCode da operação + o Id 
 });
 
 app.MapGet("/produtos/{Id}", ( [FromRoute] int Id) =>
