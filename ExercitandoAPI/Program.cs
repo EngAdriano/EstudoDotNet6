@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ApplicationDbContext>();
+
 var app = builder.Build();
 var configuracao = app.Configuration;                   //Inicializando nossa lista pelo
 ProdutoRepositorio.Init(configuracao);                  //appsettings.json
@@ -79,4 +82,12 @@ public class Produto
     public int Id { get; set; }
     public string? Nome { get; set; }
     public string? Descricao { get; set; }
+}
+
+public class ApplicationDbContext : DbContext
+{
+    public DbSet<Produto> Produtos { get; set; }        //Indica que a class Produto precisa ser mapeada para um banco de dados
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options) 
+        => options.UseSqlServer("Server=localhost;Database=Produtos;User Id=sa;Password=Liukin@1208;MultipleActiveResultSets=true;Encrypt=YES;TrustServerCertificate=YES");
 }
